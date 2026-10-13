@@ -1,0 +1,1211 @@
+/* ─────────────────────────────────────────────────────────────
+   CavalariDev · YASB
+   Paleta Nocturne: fundo #161826, texto #e9e9ed, acento #9184d9
+   O acento é linha e brilho, nunca preenchimento grande.
+   ───────────────────────────────────────────────────────────── */
+:root {
+    --bg: #161826;
+    --surface: #232532;
+    --text: #e9e9ed;
+    --accent: #9184d9;
+    --accent-300: #d2cefd;
+    --accent-400: #b5abfc;
+    --accent-700: #5d5294;
+    --accent-900: #2b2741;
+    --n-300: #cfd3e5;
+    --n-400: #b2b6ca;
+    --n-500: #9397ab;
+    --n-600: #75798c;
+    --n-700: #595d6c;
+    --n-800: #3f424d;
+    --n-900: #292b31;
+    --green: #8ed6a8;
+    --blue: #8fb9e8;
+    --amber: #e3b478;
+    --rose: #e89a9a;
+    --pill: rgba(22, 24, 38, 0.55);
+    --popup: rgba(22, 24, 38, 0.80);
+    --edge: rgba(233, 233, 237, 0.08);
+    --hover: rgba(233, 233, 237, 0.07);
+    --font: "Segoe UI";
+    --mono: "JetBrainsMono NFP";
+}
+
+* {
+    font-size: 13px;
+    color: var(--n-300);
+    font-weight: 600;
+    font-family: var(--font), var(--mono);
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Barra de ponta a ponta (acrylic em toda a faixa) ─────── */
+.yasb-bar {
+    background-color: rgba(22, 24, 38, 0.62);
+    border: none;
+    border-bottom: 1px solid rgba(233, 233, 237, 0.06);
+    padding: 0;
+    margin: 0;
+}
+.container-left,
+.container-center,
+.container-right {
+    margin: 0;
+    padding: 0;
+}
+.container-left {
+    padding-left: 10px;
+}
+.container-right {
+    padding-right: 10px;
+}
+/* ilha dinâmica: pílula com contorno sutil, só do tamanho do conteúdo */
+.island-group {
+    padding: 0;
+    margin: 0;
+}
+.island-group .container {
+    background-color: rgba(35, 37, 50, 0.55);
+    border: 1px solid rgba(145, 132, 217, 0.28);
+    border-radius: 14px;
+    margin: 4px 0;
+    padding: 0 4px;
+}
+.widget {
+    padding: 0 6px;
+    margin: 0;
+}
+.widget .label {
+    padding: 0;
+}
+.widget .label.alt {
+    padding: 0;
+}
+.icon {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--n-300);
+    padding-right: 5px;
+}
+
+/* ── Tooltip e menus de contexto ──────────────────────────── */
+.tooltip {
+    background-color: var(--popup);
+    border: 1px solid var(--n-800);
+    border-radius: 6px;
+    color: var(--text);
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: var(--font);
+    font-weight: 600;
+}
+.context-menu,
+.context-menu .menu-checkbox {
+    background-color: var(--surface);
+    border: 1px solid var(--n-800);
+    padding: 4px 0;
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--text);
+}
+.context-menu::item,
+.context-menu .menu-checkbox {
+    background-color: transparent;
+    padding: 6px 12px;
+    margin: 2px 6px;
+    border-radius: 6px;
+    min-width: 120px;
+}
+.context-menu::item:selected,
+.context-menu .menu-checkbox:hover {
+    background-color: var(--accent-900);
+    color: var(--accent-300);
+}
+.context-menu::separator {
+    height: 1px;
+    background-color: var(--n-800);
+    margin: 4px 8px;
+}
+.context-menu::item:disabled {
+    color: var(--n-600);
+}
+
+/* ═════════════ ILHA ESQUERDA · komorebi ═════════════════════ */
+
+/* Marca "C": abre o menu do komorebi */
+.komorebi-control-widget {
+    padding: 0 4px 0 2px;
+}
+.komorebi-control-widget .label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent-400);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    padding: 0 5px;
+    min-height: 18px;
+    max-height: 18px;
+    transition: all 150ms ease-out;
+}
+.komorebi-control-widget .label:hover {
+    color: var(--accent-300);
+    background-color: rgba(145, 132, 217, 0.18);
+}
+.komorebi-control-menu {
+    background-color: var(--popup);
+    padding: 10px;
+    min-width: 260px;
+}
+.komorebi-control-menu .button {
+    background-color: transparent;
+    border: 1px solid var(--n-800);
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin: 4px;
+    font-family: "Segoe Fluent Icons";
+    font-size: 16px;
+    color: var(--n-300);
+}
+.komorebi-control-menu .button:hover {
+    border-color: var(--accent);
+    color: var(--accent-300);
+}
+.komorebi-control-menu .button.active {
+    border-color: var(--accent);
+    color: var(--accent-400);
+}
+.komorebi-control-menu .button:disabled {
+    color: var(--n-700);
+    border-color: var(--n-900);
+}
+.komorebi-control-menu .footer .text {
+    font-size: 11px;
+    color: var(--n-500);
+    font-family: var(--mono);
+    padding-top: 6px;
+}
+
+/* Workspaces: pontos; o ativo vira barra blurple */
+.komorebi-workspaces {
+    padding: 0 4px;
+}
+.komorebi-workspaces .widget-container {
+    padding: 0;
+}
+.komorebi-workspaces .offline-status {
+    color: var(--n-500);
+    font-size: 12px;
+}
+.komorebi-workspaces .ws-btn {
+    font-size: 1px;
+    color: transparent;
+    background-color: var(--n-700);
+    border: none;
+    border-radius: 4px;
+    margin: 0 3px;
+    padding: 0;
+    min-width: 8px;
+    max-width: 8px;
+    min-height: 8px;
+    max-height: 8px;
+    transition: all 220ms ease-out;
+}
+.komorebi-workspaces .ws-btn.populated {
+    background-color: var(--n-400);
+}
+.komorebi-workspaces .ws-btn:hover {
+    background-color: var(--accent-300);
+}
+.komorebi-workspaces .ws-btn.active {
+    background-color: var(--accent);
+    min-width: 22px;
+    max-width: 22px;
+}
+
+/* Layout: BSP, COLS… em mono discreto */
+.komorebi-active-layout {
+    padding: 0 6px 0 2px;
+}
+.komorebi-active-layout .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--n-500);
+    padding: 2px 4px;
+    border-radius: 5px;
+    transition: all 150ms ease-out;
+}
+.komorebi-active-layout .label:hover {
+    color: var(--accent-300);
+    background-color: rgba(145, 132, 217, 0.12);
+}
+
+/* Stack: aparece só com janelas empilhadas */
+.komorebi-stack {
+    padding: 0 4px;
+}
+.komorebi-stack .window {
+    background-color: transparent;
+    border: 1px solid var(--n-800);
+    border-radius: 6px;
+    padding: 1px 8px;
+    margin: 0 2px;
+}
+.komorebi-stack .window .label {
+    font-size: 11px;
+    color: var(--n-500);
+}
+.komorebi-stack .window.active {
+    border-color: var(--accent-700);
+    background-color: rgba(145, 132, 217, 0.10);
+}
+.komorebi-stack .window.active .label {
+    color: var(--accent-300);
+}
+
+/* Pomodoro: âmbar quando rodando */
+.pomodoro-widget {
+    border-left: 1px solid var(--edge);
+    padding: 0 4px 0 10px;
+}
+.pomodoro-widget .icon {
+    color: var(--n-500);
+    font-size: 14px;
+}
+.pomodoro-widget .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--n-500);
+}
+.pomodoro-widget .icon.work,
+.pomodoro-widget .label.work {
+    color: var(--amber);
+}
+.pomodoro-widget .icon.break,
+.pomodoro-widget .label.break {
+    color: var(--green);
+}
+.pomodoro-widget .icon.paused,
+.pomodoro-widget .label.paused {
+    color: var(--n-500);
+}
+.pomodoro-menu {
+    background-color: var(--popup);
+    min-width: 240px;
+}
+.pomodoro-menu .header {
+    font-size: 13px;
+    color: var(--text);
+}
+.pomodoro-menu .status,
+.pomodoro-menu .session {
+    font-size: 12px;
+    color: var(--n-500);
+}
+.pomodoro-menu .button {
+    background-color: transparent;
+    border: 1px solid var(--n-800);
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin: 4px;
+    color: var(--n-300);
+}
+.pomodoro-menu .button:hover {
+    border-color: var(--accent);
+    color: var(--accent-300);
+}
+
+/* ═════════════ ILHA CENTRAL · dinâmica ══════════════════════ */
+/* a mídia some quando nada toca; o separador vai junto */
+.media-widget {
+    padding: 0 6px 0 2px;
+    margin: 0;
+    border-right: 1px solid var(--edge);
+}
+.media-widget .widget-container {
+    padding: 0;
+}
+.media-widget .label {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0 4px 0 0;
+}
+.media-widget .label.alt {
+    color: var(--text);
+}
+.media-widget .btn {
+    color: var(--n-400);
+    font-family: "Segoe Fluent Icons";
+    padding: 0 4px;
+}
+
+/* Ilha de mídia: só a capa (o separador some junto quando nada toca) */
+.media-lite-widget {
+    padding: 0 8px 0 4px;
+    margin: 0;
+    border-right: 1px solid var(--edge);
+}
+.media-lite-widget .widget-container {
+    padding: 0;
+}
+.media-lite-widget .thumbnail {
+    margin: 0;
+}
+.media-lite-menu {
+    background-color: var(--popup);
+    min-width: 320px;
+    max-width: 320px;
+}
+/* Respiro interno: vai nos containers do popup (header, tempo, controles). */
+.media-lite-menu .header {
+    padding: 14px 16px 0 16px;
+}
+.media-lite-menu .thumbnail {
+    margin: 2px 0 12px 0;
+}
+.media-lite-menu .title,
+.media-lite-menu .artist {
+    min-width: 280px;
+    max-width: 280px;
+    -qproperty-alignment: AlignCenter;
+}
+.media-lite-menu .artist {
+    padding-top: 2px;
+}
+.media-lite-menu .media-timeline-container {
+    padding: 10px 18px 0 18px;
+}
+.media-lite-menu .controls {
+    padding: 4px 0 14px 0;
+}
+.media-lite-menu .title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    font-family: var(--font);
+}
+.media-lite-menu .artist {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--n-400);
+    font-family: var(--font);
+}
+.media-lite-menu .source {
+    padding: 2px;
+}
+.media-lite-menu .btn {
+    font-family: "Segoe Fluent Icons";
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--n-300);
+    background-color: transparent;
+    min-width: 38px;
+    max-width: 38px;
+    min-height: 38px;
+    max-height: 38px;
+    border-radius: 19px;
+    margin: 0 3px;
+}
+.media-lite-menu .btn:hover {
+    color: var(--accent-300);
+    background-color: var(--hover);
+}
+.media-lite-menu .btn.play {
+    color: var(--accent-300);
+    border: 1px solid var(--accent);
+    font-size: 18px;
+}
+.media-lite-menu .btn.active {
+    color: var(--accent-400);
+}
+.media-lite-menu .btn.disabled {
+    color: var(--n-700);
+}
+.media-lite-menu .playback-time {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--n-400);
+}
+.media-lite-menu .progress-slider::groove {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(233, 233, 237, 0.15);
+}
+.media-lite-menu .progress-slider::sub-page {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent);
+}
+.media-lite-menu .volume-button {
+    font-family: "Segoe Fluent Icons";
+    color: var(--n-300);
+    background-color: transparent;
+}
+.media-lite-menu .volume-button.unavailable {
+    color: var(--n-700);
+}
+.media-lite-menu .volume-slider::groove {
+    width: 4px;
+    border-radius: 2px;
+    background: rgba(233, 233, 237, 0.15);
+}
+.media-lite-menu .volume-slider::add-page {
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+.audio-visualizer-widget {
+    padding: 0 2px 0 10px;
+}
+.audio-visualizer-widget .audio-visualizer-canvas {
+    -qproperty-fillbrush: linear-gradient(to top, #796cbf, #9184d9 50%, #d2cefd);
+}
+
+.clock-widget {
+    padding: 0 10px 0 4px;
+}
+.clock-widget .label {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent-400);
+}
+/* data (dia da semana + dia), antes da hora */
+.clock-widget.clock-date {
+    padding: 0 4px 0 10px;
+}
+.clock-widget.clock-date .label {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--n-400);
+}
+
+/* Painel de mídia */
+.media-menu {
+    min-width: 400px;
+    max-width: 400px;
+    background-color: var(--popup);
+}
+.media-menu .title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-left: 12px;
+    font-family: var(--font);
+}
+.media-menu .artist {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--n-500);
+    margin-left: 12px;
+    font-family: var(--font);
+}
+.media-menu .source {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent-300);
+    background-color: rgba(145, 132, 217, 0.14);
+    border: 1px solid var(--accent-700);
+    border-radius: 9px;
+    padding: 2px 8px;
+    margin-left: 12px;
+    margin-top: 8px;
+    font-family: var(--font);
+}
+.media-menu .source.spotify {
+    color: #8ed6a8;
+    background-color: rgba(29, 185, 84, 0.14);
+    border-color: rgba(29, 185, 84, 0.45);
+}
+.media-menu .source.brave {
+    color: #f6b39c;
+    background-color: rgba(251, 84, 43, 0.14);
+    border-color: rgba(251, 84, 43, 0.45);
+}
+.media-menu .source.chrome,
+.media-menu .source.edge {
+    color: var(--blue);
+    background-color: rgba(143, 185, 232, 0.12);
+    border-color: rgba(143, 185, 232, 0.4);
+}
+.media-menu .btn {
+    font-family: "Segoe Fluent Icons";
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--n-300);
+    background-color: transparent;
+    margin: 10px 4px 0 4px;
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 20px;
+}
+.media-menu .btn.prev {
+    margin-left: 12px;
+}
+.media-menu .btn:hover {
+    color: var(--accent-300);
+    background-color: var(--hover);
+}
+.media-menu .btn.play {
+    color: var(--accent-300);
+    border: 1px solid var(--accent);
+    font-size: 18px;
+}
+.media-menu .btn.play:hover {
+    background-color: rgba(145, 132, 217, 0.18);
+}
+.media-menu .btn.disabled,
+.media-menu .btn.disabled:hover {
+    color: var(--n-700);
+    background-color: transparent;
+    border-color: var(--n-800);
+}
+.media-menu .playback-time {
+    font-size: 11px;
+    font-family: var(--mono);
+    font-weight: 500;
+    color: var(--n-500);
+    margin-top: 16px;
+    min-width: 80px;
+}
+.media-menu .progress-slider {
+    height: 12px;
+    margin: 6px 4px;
+}
+.media-menu .progress-slider::groove {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--n-800);
+}
+.media-menu .progress-slider::sub-page {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent);
+}
+.media-menu .progress-slider::handle {
+    background: var(--accent-300);
+    width: 12px;
+    height: 12px;
+    margin: -4px 0;
+    border-radius: 6px;
+}
+.media-menu .app-volume-container {
+    background-color: rgba(233, 233, 237, 0.04);
+    padding: 8px 6px;
+    border-radius: 14px;
+    margin-left: 10px;
+}
+.media-menu .app-volume-container .volume-slider::groove {
+    background: var(--n-800);
+    width: 4px;
+    border-radius: 2px;
+}
+.media-menu .app-volume-container .volume-slider::add-page {
+    background: var(--accent);
+    border-radius: 2px;
+}
+.media-menu .app-volume-container .volume-slider::sub-page {
+    background: var(--n-800);
+    border-radius: 2px;
+}
+.media-menu .app-volume-container .volume-slider::handle {
+    background: var(--accent-300);
+    height: 10px;
+    margin: 0 -3px;
+    border-radius: 5px;
+}
+.media-menu .app-volume-container .mute-button,
+.media-menu .app-volume-container .unmute-button {
+    font-size: 15px;
+    color: var(--n-300);
+    font-family: "Segoe Fluent Icons";
+    margin-top: 4px;
+}
+.media-menu .app-volume-container .unmute-button {
+    color: var(--n-600);
+}
+
+/* Calendário do relógio */
+.clock-popup.calendar {
+    background-color: var(--popup);
+    padding: 12px;
+}
+.clock-popup.calendar .calendar-table,
+.clock-popup.calendar .calendar-table::item {
+    background-color: transparent;
+    color: var(--n-300);
+    font-family: var(--font);
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+.clock-popup.calendar .calendar-table::item:selected {
+    color: var(--bg);
+    background-color: var(--accent);
+    border-radius: 12px;
+}
+.clock-popup.calendar .day-label {
+    margin-top: 10px;
+    color: var(--n-500);
+}
+.clock-popup.calendar .day-label,
+.clock-popup.calendar .month-label,
+.clock-popup.calendar .date-label {
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+}
+.clock-popup.calendar .date-label {
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--accent-400);
+    margin-top: -12px;
+}
+.clock-popup.calendar .holiday-label {
+    color: var(--amber);
+    font-size: 11px;
+}
+
+/* ═════════════ ILHA ESQUERDA · apps fixados ══════════════════ */
+.taskbar-widget {
+    border-left: 1px solid var(--edge);
+    padding: 0 0 0 8px;
+    margin: 0 0 0 6px;
+}
+.taskbar-widget .widget-container {
+    padding: 0;
+}
+/* Apps não fixados ficam ocultos: só os fixados ganham tamanho.
+   O YASB marca o fixado de dois jeitos: classe "pinned" (fechado) e a
+   propriedade pinned=true (aberto, quando a classe vira running/foreground). */
+.taskbar-widget .app-container {
+    margin: 0;
+    padding: 0;
+    border: none;
+    min-width: 0;
+    max-width: 0;
+    background-color: transparent;
+}
+.taskbar-widget .app-container.pinned,
+.taskbar-widget .app-container[pinned="true"] {
+    min-width: 30px;
+    max-width: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    margin: 0 2px;
+    padding: 0;
+    border-radius: 8px;
+    opacity: 0.5;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    transition: opacity 150ms ease-out, background-color 150ms ease-out;
+}
+.taskbar-widget .app-container.pinned:hover,
+.taskbar-widget .app-container[pinned="true"]:hover {
+    background-color: var(--hover);
+    opacity: 1;
+}
+/* aberto: linha curta cinza */
+.taskbar-widget .app-container.running[pinned="true"] {
+    opacity: 1;
+    background-image: url("C:/Users/felip/.config/yasb/assets/dock-running.png");
+}
+.taskbar-widget .app-container.running.minimized[pinned="true"] {
+    opacity: 0.8;
+}
+/* em foco: linha blurple com brilho */
+.taskbar-widget .app-container.foreground[pinned="true"] {
+    opacity: 1;
+    background-image: url("C:/Users/felip/.config/yasb/assets/dock-focused.png");
+}
+.taskbar-widget .app-container.flashing[pinned="true"] {
+    background-color: rgba(227, 180, 120, 0.22);
+}
+.taskbar-widget .app-container .app-icon {
+    padding: 0;
+    margin: 0;
+}
+.taskbar-widget .app-container .app-title {
+    padding: 0;
+}
+
+/* ═════════════ ILHA DIREITA · sistema ═══════════════════════ */
+.claude-usage {
+    padding: 0 6px 0 6px;
+}
+.claude-usage .icon {
+    color: var(--accent-400);
+    font-size: 14px;
+    padding-right: 4px;
+}
+.claude-usage .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--n-300);
+}
+.claude-usage .stale {
+    color: var(--amber);
+}
+.codex-usage {
+    padding: 0 8px 0 6px;
+}
+.codex-usage .icon {
+    color: var(--green);
+    font-size: 14px;
+    padding-right: 4px;
+}
+.codex-usage .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--n-300);
+}
+
+/* menus de uso (Claude / Codex) */
+.claude-usage-menu,
+.codex-usage-menu {
+    background-color: var(--popup);
+    min-width: 340px;
+}
+.claude-usage-menu .header,
+.codex-usage-menu .header {
+    padding: 14px 18px 10px 18px;
+    border-bottom: 1px solid var(--edge);
+}
+.claude-usage-menu .section,
+.codex-usage-menu .section {
+    padding: 10px 18px 8px 18px;
+    margin: 0;
+}
+.claude-usage-menu .status-row {
+    padding: 6px 18px;
+}
+.claude-usage-menu .section .footer,
+.codex-usage-menu .section .stats,
+.codex-usage-menu .section .timing {
+    margin-top: 6px;
+}
+.codex-usage-menu .page,
+.codex-usage-menu .page-nav {
+    padding: 0 18px;
+}
+.codex-usage-menu .section:last-child {
+    padding-bottom: 14px;
+}
+.claude-usage-menu .header .text,
+.codex-usage-menu .header .text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+}
+.claude-usage-menu .header .refresh,
+.codex-usage-menu .header .refresh {
+    font-family: "Segoe Fluent Icons";
+    color: var(--n-500);
+    background-color: transparent;
+    border: none;
+}
+.claude-usage-menu .header .refresh:hover,
+.codex-usage-menu .header .refresh:hover {
+    color: var(--accent-300);
+}
+.claude-usage-menu .section .title,
+.codex-usage-menu .section .title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--n-300);
+    margin-bottom: 6px;
+}
+.claude-usage-menu .section .progress,
+.codex-usage-menu .section .progress {
+    background-color: var(--n-800);
+    border-radius: 3px;
+    min-height: 6px;
+    max-height: 6px;
+}
+.claude-usage-menu .section .progress .fill {
+    background-color: var(--accent);
+    border-radius: 3px;
+}
+.claude-usage-menu .section .progress.medium .fill {
+    background-color: var(--amber);
+}
+.claude-usage-menu .section .progress.high .fill {
+    background-color: var(--rose);
+}
+.codex-usage-menu .section .progress .fill {
+    background-color: var(--green);
+    border-radius: 3px;
+}
+.codex-usage-menu .section .progress.low .fill {
+    background-color: var(--amber);
+}
+.codex-usage-menu .section .progress.critical .fill {
+    background-color: var(--rose);
+}
+.claude-usage-menu .section .footer .reset,
+.claude-usage-menu .section .date,
+.codex-usage-menu .section .reset,
+.codex-usage-menu .section .date {
+    font-size: 11px;
+    color: var(--n-500);
+}
+.claude-usage-menu .section .footer .percent,
+.codex-usage-menu .section .used,
+.codex-usage-menu .section .remaining {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--n-300);
+}
+
+/* CPU / GPU / RAM: recolhido no ícone de chip */
+.sys-group .container {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.sys-group .grouper-button {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--n-300);
+    background-color: transparent;
+    border: none;
+    padding: 0 6px;
+    border-radius: 6px;
+}
+.sys-group .grouper-button:hover {
+    color: var(--accent-300);
+}
+.cpu-widget,
+.gpu-widget,
+.memory-widget {
+    padding: 0 5px;
+}
+.cpu-widget .label,
+.gpu-widget .label,
+.memory-widget .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--n-300);
+}
+.cpu-widget .label .tag,
+.gpu-widget .label .tag,
+.memory-widget .label .tag,
+.tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--n-500);
+    padding-right: 4px;
+}
+.cpu-widget .label.status-high,
+.gpu-widget .label.status-high,
+.memory-widget .label.status-high {
+    color: var(--amber);
+}
+.cpu-widget .label.status-critical,
+.gpu-widget .label.status-critical,
+.memory-widget .label.status-critical {
+    color: var(--rose);
+}
+.cpu-popup,
+.gpu-popup,
+.memory-popup {
+    background-color: var(--popup);
+}
+.cpu-popup .header .text,
+.gpu-popup .header .text,
+.memory-popup .header .text {
+    font-size: 13px;
+    color: var(--text);
+}
+.cpu-popup .stats .stat-label,
+.gpu-popup .stats .stat-label,
+.memory-popup .stats .stat-label {
+    font-size: 11px;
+    color: var(--n-500);
+}
+.cpu-popup .stats .stat-value,
+.gpu-popup .stats .stat-value,
+.memory-popup .stats .stat-value {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+}
+
+/* Ícone de PC (abre o popup de sistema) */
+.sysmon-widget {
+    padding: 0 8px 0 6px;
+}
+.sysmon-widget .icon,
+.sysmon-widget .label {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--n-300);
+    padding: 0;
+}
+.sysmon-widget .icon:hover,
+.sysmon-widget .label:hover {
+    color: var(--accent-300);
+}
+
+/* Brilho */
+.brightness-widget {
+    border-left: 1px solid var(--edge);
+    padding: 0 6px 0 12px;
+}
+.brightness-widget .icon {
+    font-size: 15px;
+}
+.brightness-widget .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+}
+.brightness-menu {
+    background-color: var(--popup);
+    min-width: 320px;
+}
+.brightness-menu .monitor-row {
+    margin: 12px;
+}
+.brightness-menu .monitor-row.monitor-0 {
+    margin-bottom: 0;
+}
+.brightness-menu .monitor-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 4px;
+}
+.brightness-menu .monitor-subtitle {
+    font-size: 11px;
+    color: var(--n-500);
+    margin-top: 2px;
+    margin-bottom: 8px;
+}
+.brightness-menu .slider-rows {
+    background-color: rgba(233, 233, 237, 0.04);
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+.brightness-menu .slider-icon {
+    font-family: "Segoe Fluent Icons";
+    color: var(--n-400);
+}
+.brightness-menu .slider-row {
+    margin: 2px 0;
+    padding: 6px 0;
+}
+.brightness-slider::groove,
+.contrast-slider::groove {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--n-800);
+}
+.brightness-slider::sub-page,
+.contrast-slider::sub-page {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent);
+}
+.brightness-slider::handle,
+.contrast-slider::handle {
+    background: var(--accent-300);
+    width: 14px;
+    height: 14px;
+    margin: -5px 0;
+    border-radius: 7px;
+}
+
+/* Volume */
+.volume-widget {
+    padding: 0 6px;
+}
+.volume-widget .icon {
+    font-size: 15px;
+}
+.volume-widget .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+}
+.volume-widget .icon.muted,
+.volume-widget .label.muted {
+    color: var(--n-600);
+}
+.audio-menu {
+    background-color: var(--popup);
+    min-width: 340px;
+}
+.audio-menu .audio-container {
+    padding: 10px 10px 4px 10px;
+}
+.audio-menu .system-volume-container {
+    padding: 8px 18px 14px 18px;
+}
+.audio-menu .apps-container {
+    padding: 0 14px 10px 14px;
+}
+.audio-menu .system-volume-container .volume-slider {
+    border: none;
+}
+.audio-menu .system-volume-container .volume-slider::groove,
+.audio-menu .apps-container .app-volume .app-slider::groove {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--n-800);
+}
+.audio-menu .system-volume-container .volume-slider::sub-page,
+.audio-menu .apps-container .app-volume .app-slider::sub-page {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent);
+}
+.audio-menu .system-volume-container .volume-slider::handle,
+.audio-menu .apps-container .app-volume .app-slider::handle {
+    background: var(--accent-300);
+    width: 14px;
+    height: 14px;
+    margin: -5px 0;
+    border-radius: 7px;
+}
+.audio-menu .audio-container .device {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    padding: 7px 10px;
+    margin: 2px 0;
+    font-size: 12px;
+    color: var(--n-300);
+    border-radius: 6px;
+}
+.audio-menu .audio-container .device.selected {
+    background-color: var(--accent-900);
+    color: var(--accent-300);
+}
+.audio-menu .audio-container .device:hover {
+    background-color: var(--hover);
+}
+.audio-menu .toggle-apps {
+    background-color: transparent;
+    border: none;
+    color: var(--n-500);
+    font-size: 12px;
+}
+.audio-menu .toggle-apps:hover {
+    color: var(--accent-300);
+}
+.audio-menu .apps-container .app-volume .app-label {
+    font-size: 12px;
+    color: var(--n-300);
+}
+
+/* Notificações + Não perturbe */
+.notification-widget {
+    border-left: 1px solid var(--edge);
+    padding: 0 4px 0 12px;
+}
+.notification-widget .icon {
+    font-size: 15px;
+    padding-right: 3px;
+}
+.notification-widget .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--n-500);
+}
+.notification-widget .icon.new-notification {
+    color: var(--accent-400);
+}
+.notification-widget .label.new-notification {
+    color: var(--bg);
+    background-color: var(--accent);
+    border-radius: 8px;
+    padding: 0 5px;
+    min-height: 16px;
+    max-height: 16px;
+    font-weight: 700;
+}
+.dnd-widget {
+    padding: 0 4px;
+}
+.dnd-widget .widget-container .icon,
+.dnd-widget .widget-container .label {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--n-600);
+    padding: 0;
+}
+.dnd-widget .widget-container .icon.status-priority,
+.dnd-widget .widget-container .label.status-priority,
+.dnd-widget .widget-container .icon.status-alarms,
+.dnd-widget .widget-container .label.status-alarms {
+    color: var(--accent-300);
+}
+
+/* Energia */
+.power-menu-widget {
+    padding: 0 6px 0 4px;
+}
+.power-menu-widget .label {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--rose);
+}
+.power-menu-compact {
+    background-color: var(--popup);
+    min-width: 240px;
+    padding: 6px;
+}
+.power-menu-compact .profile-info .profile-username {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+}
+.power-menu-compact .profile-info .profile-account-type,
+.power-menu-compact .profile-info .profile-email {
+    font-size: 11px;
+    color: var(--n-500);
+}
+.power-menu-compact .button {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 6px 10px;
+    margin: 2px 0;
+}
+.power-menu-compact .button.hover {
+    background-color: var(--hover);
+    border-color: var(--n-800);
+}
+.power-menu-compact .button .icon {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--n-400);
+    padding-right: 10px;
+}
+.power-menu-compact .button .label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--n-300);
+}
+.power-menu-compact .button.shutdown .icon,
+.power-menu-compact .button.shutdown .label {
+    color: var(--rose);
+}

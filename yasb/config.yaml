@@ -1,0 +1,550 @@
+# ─────────────────────────────────────────────────────────────
+#  CavalariDev · YASB
+#  Paleta Nocturne · barra de ponta a ponta com acrylic
+#  Uma barra por monitor; a ilha dinâmica fica no centro.
+#  Backup do tema anterior: backup-2026-10-13/
+# ─────────────────────────────────────────────────────────────
+watch_stylesheet: true
+watch_config: true
+debug: false
+update_check: true
+
+komorebi:
+  start_command: "komorebic start --whkd"
+  stop_command: "komorebic stop --whkd"
+  reload_command: "komorebic reload-configuration"
+
+tooltip:
+  offset: 8
+  blur_effect:
+    enabled: true
+    dark_mode: true
+    round_corners: true
+    round_corners_type: "small"
+    border_color: "#3f424d"
+
+bars:
+  # ── Monitor principal: barra completa, de ponta a ponta ────
+  cd-main:
+    enabled: true
+    screens: ['primary']
+    class_name: "yasb-bar"
+    alignment: { position: "top", align: "center" }
+    blur_effect: &acrylic
+      enabled: true
+      dark_mode: true
+      round_corners: false
+      border_color: "None"
+    window_flags: &flags
+      always_on_top: false
+      windows_app_bar: true
+      hide_on_fullscreen: true
+    dimensions: { width: "100%", height: 38 }
+    padding: { top: 0, left: 0, bottom: 0, right: 0 }
+    animation: { enabled: true, duration: 250, type: "fade" }
+    widgets:
+      left: ["komorebi_control", "komorebi_workspaces", "komorebi_active_layout", "komorebi_stack", "pomodoro", "taskbar"]
+      center: ["island"]
+      right: ["claude_usage", "codex_usage", "sysmon", "brightness", "volume", "notifications", "dnd", "power_menu"]
+
+  # ── Demais monitores: barra leve ───────────────────────────
+  cd2-main:
+    enabled: true
+    screens: ['*']
+    class_name: "yasb-bar"
+    alignment: { position: "top", align: "center" }
+    blur_effect: *acrylic
+    window_flags: *flags
+    dimensions: { width: "100%", height: 38 }
+    padding: { top: 0, left: 0, bottom: 0, right: 0 }
+    animation: { enabled: true, duration: 250, type: "fade" }
+    widgets:
+      left: ["komorebi_workspaces", "komorebi_active_layout", "taskbar"]
+      center: ["island_lite"]
+      right: ["brightness", "volume"]
+
+widgets:
+  # ── Ilha esquerda: komorebi ────────────────────────────────
+  komorebi_control:
+    type: "komorebi.control.KomorebiControlWidget"
+    options:
+      label: "C"
+      icons:
+        start: ""
+        stop: ""
+        reload: ""
+      run_whkd: true
+      show_version: true
+      komorebi_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#3f424d"
+        alignment: "left"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+
+  komorebi_workspaces:
+    type: "komorebi.workspaces.WorkspaceWidget"
+    options:
+      label_offline: "komorebi offline"
+      label_workspace_btn: ""
+      label_workspace_active_btn: ""
+      label_workspace_populated_btn: ""
+      label_default_name: ""
+      label_zero_index: false
+      hide_empty_workspaces: false
+      hide_if_offline: false
+      enable_scroll_switching: true
+
+  komorebi_active_layout:
+    type: "komorebi.active_layout.ActiveLayoutWidget"
+    options:
+      hide_if_offline: true
+      label: "{icon}"
+      layouts: ['bsp', 'columns', 'rows', 'grid', 'vertical_stack', 'horizontal_stack', 'ultrawide_vertical_stack', 'right_main_vertical_stack']
+      layout_icons:
+        bsp: "BSP"
+        columns: "COLS"
+        rows: "ROWS"
+        grid: "GRID"
+        scrolling: "SCROLL"
+        vertical_stack: "V-STACK"
+        horizontal_stack: "H-STACK"
+        ultrawide_vertical_stack: "W-STACK"
+        right_main_vertical_stack: "RMV-STACK"
+        monocle: "MONOCLE"
+        maximized: "MAX"
+        floating: "FLOAT"
+        paused: "PAUSED"
+      callbacks:
+        on_left: "next_layout"
+        on_middle: "toggle_monocle"
+        on_right: "prev_layout"
+
+  komorebi_stack:
+    type: "komorebi.stack.StackWidget"
+    options:
+      label_offline: ""
+      label_window: "{process}"
+      label_window_active: "{process}"
+      label_no_window: ""
+      show_icons: "never"
+      max_length: 14
+      max_length_active: 14
+      max_length_ellipsis: "…"
+      hide_if_offline: true
+      show_only_stack: true
+      enable_scroll_switching: true
+      rewrite:
+        - pattern: "^(.+?)\\.exe$"
+          replacement: "\\1"
+          case: "capitalize"
+
+  pomodoro:
+    type: "yasb.pomodoro.PomodoroWidget"
+    options:
+      label: "<span>{icon}</span> {remaining}"
+      label_alt: "<span>{icon}</span> {session}/{total_sessions}"
+      work_duration: 25
+      break_duration: 5
+      long_break_duration: 15
+      long_break_interval: 4
+      auto_start_breaks: true
+      auto_start_work: false
+      sound_notification: true
+      show_notification: true
+      session_target: 0
+      icons:
+        work: "\U000F051B"
+        break: "\U000F0176"
+        paused: "\U000F03E4"
+      menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#3f424d"
+        alignment: "left"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+        circle_background_color: "#292b31"
+        circle_work_progress_color: "#e3b478"
+        circle_break_progress_color: "#8ed6a8"
+        circle_thickness: 6
+        circle_size: 140
+      callbacks:
+        on_left: "toggle_timer"
+        on_middle: "reset_timer"
+        on_right: "toggle_menu"
+
+  # ── Ilha central: dinâmica ─────────────────────────────────
+  media:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "{title}"
+      label_alt: "{title}{s}{artist}"
+      separator: "  ·  "
+      hide_empty: true
+      max_field_size:
+        label: 32
+        label_alt: 48
+        truncate_whole_label: false
+      show_thumbnail: true
+      controls_only: false
+      controls_left: false
+      controls_hide: true
+      thumbnail_alpha: 70           # capa como fundo suave da ilha
+      thumbnail_padding: 12
+      thumbnail_corner_radius: 8
+      symmetric_corner_radius: true
+      thumbnail_edge_fade: true
+      icons:
+        prev_track: ""
+        next_track: ""
+        play: ""
+        pause: ""
+      media_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#5d5294"
+        alignment: "center"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+        thumbnail_corner_radius: 10
+        thumbnail_size: 96
+        max_title_size: 40
+        max_artist_size: 30
+        max_source_size: 16
+        show_source: true
+        show_volume_slider: true
+      media_menu_icons:
+        play: ""
+        pause: ""
+        prev_track: ""
+        next_track: ""
+        mute: ""
+        unmute: ""
+      callbacks:
+        on_left: "toggle_media_menu"
+        on_middle: "toggle_play_pause"
+        on_right: "toggle_label"
+
+  # Ilha dinâmica: agrupa os widgets do centro numa pílula só
+  island:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "island-group"
+      widgets: ["audio_visualizer", "media_lite", "clock_date", "clock"]
+      collapse_options:
+        enabled: false
+
+  island_lite:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "island-group"
+      widgets: ["clock_date", "clock"]
+      collapse_options:
+        enabled: false
+
+  # Ilha de mídia compacta: só a capa na barra; o popup mostra o app de origem
+  media_lite:
+    type: "yasb.media_lite.MediaWidget"
+    options:
+      show_thumbnail: true
+      show_title: false
+      show_artist: false
+      scrolling_label: false
+      image_size: 22
+      thumbnail_corner_radius: 6
+      max_label_size: 20
+      tooltip: true
+      callbacks:
+        on_left: "toggle_media_menu"
+        on_middle: "do_nothing"
+        on_right: "open_media_source"
+      media_menu:
+        blur: true
+        artwork_background: true
+        artwork_blur_radius: 28
+        artwork_dim: 0.6
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#5d5294"
+        alignment: "center"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+        image_size: 150
+        thumbnail_corner_radius: 12
+
+  audio_visualizer:
+    type: "yasb.audio_visualizer.AudioVisualizerWidget"
+    options:
+      style: "bars"
+      height: 14
+      smoothness: 70
+      sensitivity: 50
+      auto_gain: true
+      framerate: 30                  # 30 fps: suave e leve
+      freq_min: 60
+      freq_max: 10000
+      hide_idle: true
+      hide_idle_after: 1500
+      channels: "mono"
+      mono_option: "average"
+      bars:
+        count: 6
+        width: 3
+        gap: 2
+
+  clock_date:
+    type: "yasb.clock.ClockWidget"
+    options:
+      class_name: "clock-date"
+      label: "{%a %d}"
+      label_alt: "{%A, %d %b}"
+      locale: "pt_BR"
+      update_interval: 60000
+      timezones: []
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "{%H:%M}"
+      label_alt: "{%H:%M:%S}"
+      locale: "pt_BR"
+      update_interval: 1000
+      timezones: []
+      calendar:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#5d5294"
+        alignment: "center"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+        show_holidays: true
+        show_week_numbers: false
+        show_years: false
+        country_code: "BR"
+        holiday_color: "#e3b478"
+        extended: false
+      callbacks:
+        on_left: "toggle_calendar"
+        on_middle: "do_nothing"
+        on_right: "toggle_label"
+
+  # ── Ilha direita: apps fixados + sistema ───────────────────
+  taskbar:
+    type: "yasb.taskbar.TaskbarWidget"
+    options:
+      icon_size: 18
+      tooltip: true
+      show_only_visible: false
+      strict_filtering: true
+      monitor_exclusive: false
+      hide_empty: false
+      animation:
+        enabled: true
+        duration: 160
+      preview:
+        enabled: false
+      grouping:
+        enabled: true
+        show_count: false
+      title_label:
+        enabled: false
+      ignore_apps:
+        processes: []
+        titles: []
+        classes: []
+      callbacks:
+        on_left: "toggle_window"
+        on_middle: "do_nothing"
+        on_right: "context_menu"
+
+  claude_usage:
+    type: "yasb.claude_usage.ClaudeUsageWidget"
+    options:
+      label: "<span>\U000F0674</span>{five_hour}%"
+      label_alt: "<span>\U000F0674</span>7d {seven_day}%"
+      update_interval: 120
+      cache_ttl: 300
+      five_hour_reset_format: "relative"
+      seven_day_reset_format: "absolute"
+      tooltip: true
+      callbacks:
+        on_left: "toggle_menu"
+        on_middle: "refresh"
+        on_right: "toggle_label"
+      menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#3f424d"
+        alignment: "right"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+
+  codex_usage:
+    type: "yasb.codex_usage.CodexUsageWidget"
+    options:
+      label: "<span>\U000F018D</span>{primary_used}%"
+      label_alt: "<span>\U000F018D</span>{secondary_window} {secondary_used}%"
+      update_interval: 120
+      cache_ttl: 300
+      timeout: 15
+      show_token_usage: false        # não varre o histórico local (mais leve)
+      tooltip: true
+      progress_bar:
+        enabled: false
+      callbacks:
+        on_left: "toggle_menu"
+        on_middle: "refresh"
+        on_right: "toggle_label"
+      menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#3f424d"
+        alignment: "right"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+        show_overview: false
+        show_models: false
+        show_activity: false
+        show_resets: false
+        show_details: false
+
+  # Ícone de PC: abre o popup de sistema (CPU/GPU/RAM com gráficos).
+  # O popup é um script à parte (scripts/sysmon.ps1) e só usa RAM enquanto aberto.
+  sysmon:
+    type: "yasb.custom.CustomWidget"
+    options:
+      label: "<span></span>"
+      label_alt: "<span></span>"
+      class_name: "sysmon-widget"
+      callbacks:
+        on_left: "exec wscript.exe C:/Users/felip/.config/yasb/scripts/sysmon.vbs"
+        on_middle: "do_nothing"
+        on_right: "exec taskmgr.exe"
+
+  brightness:
+    type: "yasb.brightness.BrightnessWidget"
+    options:
+      label: "<span>{icon}</span>{percent}%"
+      label_alt: "<span>{icon}</span>{percent}%"
+      tooltip: true
+      scroll_step: 5
+      ddc_poll_interval: 120
+      brightness_icons:
+        - "\U000F00DE"
+        - "\U000F00DD"
+        - "\U000F00DF"
+        - "\U000F00E0"
+      brightness_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#3f424d"
+        alignment: "right"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+        brightness_icon: ""
+        contrast_icon: ""
+      callbacks:
+        on_left: "toggle_brightness_menu"
+        on_middle: "do_nothing"
+        on_right: "toggle_label"
+
+  volume:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span>{level}"
+      label_alt: "{volume}"
+      icons:
+        "muted": "\U000F0581"
+        "10": "\U000F057F"
+        "30": "\U000F057F"
+        "60": "\U000F0580"
+        "100": "\U000F057E"
+      audio_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#3f424d"
+        alignment: "right"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+      callbacks:
+        on_left: "toggle_volume_menu"
+        on_middle: "toggle_mute"
+        on_right: "exec cmd.exe /c start ms-settings:sound"
+
+  notifications:
+    type: "yasb.notifications.NotificationsWidget"
+    options:
+      label: "<span>{icon}</span>{count}"
+      label_alt: "{count} notificações"
+      hide_empty: false
+      tooltip: false
+      icons:
+        new: "\U000F009E"
+        default: "\U000F009A"
+      callbacks:
+        on_left: "toggle_notification"
+        on_middle: "clear_notifications"
+        on_right: "toggle_label"
+
+  dnd:
+    type: "yasb.dnd.DndWidget"
+    options:
+      label: "{icon}"
+      label_alt: "{icon} {status}"
+      tooltip: true
+      default_active_mode: "priority"
+      icons:
+        disabled: "\U000F0594"
+        priority: "\U000F0594"
+        alarms: "\U000F0594"
+      callbacks:
+        on_left: "toggle_status"
+        on_right: "cycle_status"
+
+  power_menu:
+    type: "yasb.power_menu.PowerMenuWidget"
+    options:
+      label: "\U000F0425"
+      uptime: true
+      show_user: true
+      menu_style: "popup"
+      profile_image_size: 40
+      popup:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#3f424d"
+        alignment: "right"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+      buttons:
+        lock: ["", "Bloquear"]
+        sleep: ["\U000F04B2", "Suspender"]
+        signout: ["󰍃", "Sair"]
+        restart: ["", "Reiniciar"]
+        shutdown: ["", "Desligar"]
+        cancel: ["󰜺", "Cancelar"]
