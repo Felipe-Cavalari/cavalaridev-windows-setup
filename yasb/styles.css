@@ -946,6 +946,227 @@
     color: var(--text);
 }
 
+/* VS Code recentes + atalhos do whkd: ícones simples */
+.vscode-widget,
+.whkd-widget {
+    padding: 0 6px;
+}
+.vscode-widget .icon,
+.vscode-widget .label,
+.whkd-widget .icon,
+.whkd-widget .label {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--n-300);
+    padding: 0;
+}
+.vscode-widget .icon {
+    color: var(--blue);
+}
+.vscode-menu {
+    background-color: var(--popup);
+    min-width: 380px;
+    max-height: 460px;
+}
+.vscode-menu .header {
+    padding: 14px 16px 8px 16px;
+    border-bottom: 1px solid var(--edge);
+}
+.vscode-menu .header .title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+}
+.vscode-menu .header .filter-button {
+    background-color: transparent;
+    border: 1px solid var(--n-800);
+    border-radius: 6px;
+    padding: 2px 8px;
+    color: var(--n-400);
+    font-size: 11px;
+}
+.vscode-menu .header .filter-button:hover,
+.vscode-menu .header .filter-button.active {
+    border-color: var(--accent);
+    color: var(--accent-300);
+}
+.vscode-menu .search-bar {
+    padding: 8px 16px;
+}
+.vscode-menu .search-bar .input {
+    background-color: rgba(233, 233, 237, 0.05);
+    border: 1px solid var(--n-800);
+    border-radius: 8px;
+    padding: 6px 10px;
+    color: var(--text);
+    font-size: 12px;
+}
+.vscode-menu .search-bar .input:focus {
+    border-color: var(--accent);
+}
+.vscode-menu .contents {
+    padding: 4px 10px 10px 10px;
+    background-color: transparent;
+}
+.vscode-menu .contents .item {
+    padding: 7px 8px;
+    border-radius: 8px;
+}
+.vscode-menu .contents .item:hover {
+    background-color: var(--hover);
+}
+.vscode-menu .contents .item .title {
+    font-size: 13px;
+    color: var(--text);
+}
+.vscode-menu .contents .item .modified-date {
+    font-size: 11px;
+    color: var(--n-500);
+}
+.vscode-menu .contents .item .folder-icon,
+.vscode-menu .contents .item .file-icon,
+.vscode-menu .contents .item .remote-icon {
+    font-family: "Segoe Fluent Icons";
+    font-size: 15px;
+    color: var(--accent-400);
+    padding-right: 8px;
+}
+.vscode-menu .no-recent {
+    color: var(--n-500);
+    padding: 16px;
+}
+
+.whkd-popup {
+    background-color: var(--bg);
+}
+.whkd-popup .filter-input {
+    background-color: rgba(233, 233, 237, 0.05);
+    border: 1px solid var(--n-800);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 12px;
+    color: var(--text);
+    font-size: 13px;
+}
+.whkd-popup .filter-input:focus {
+    border-color: var(--accent);
+}
+.whkd-popup .edit-config-button {
+    background-color: transparent;
+    border: 1px solid var(--n-800);
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin: 12px;
+    color: var(--n-300);
+}
+.whkd-popup .edit-config-button:hover {
+    border-color: var(--accent);
+    color: var(--accent-300);
+}
+.whkd-popup .keybind-header {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent-400);
+    padding: 12px 14px 4px 14px;
+}
+.whkd-popup .keybind-row {
+    padding: 6px 14px;
+    border-radius: 6px;
+}
+.whkd-popup .keybind-row:hover {
+    background-color: var(--hover);
+}
+.whkd-popup .keybind-button {
+    background-color: var(--surface);
+    border: 1px solid var(--n-800);
+    border-bottom: 2px solid var(--n-800);
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+}
+.whkd-popup .keybind-button.special {
+    color: var(--accent-300);
+}
+.whkd-popup .plus-separator {
+    color: var(--n-600);
+    padding: 0 3px;
+}
+.whkd-popup .keybind-command {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--n-400);
+    padding-left: 12px;
+}
+
+/* Microfone (ao lado do volume) */
+.microphone-widget {
+    padding: 0 6px;
+}
+.microphone-widget .icon {
+    font-size: 15px;
+    padding-right: 0;
+}
+.microphone-widget .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    padding-left: 4px;
+}
+.microphone-widget .icon.muted,
+.microphone-widget .label.muted {
+    color: var(--rose);
+}
+.microphone-widget .icon.no-device {
+    color: var(--n-700);
+}
+.microphone-menu {
+    background-color: var(--popup);
+    min-width: 320px;
+}
+.microphone-menu .microphone-container {
+    padding: 10px 10px 4px 10px;
+}
+.microphone-menu .microphone-container .device {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    padding: 7px 10px;
+    margin: 2px 0;
+    font-size: 12px;
+    color: var(--n-300);
+    border-radius: 6px;
+}
+.microphone-menu .microphone-container .device.selected {
+    background-color: var(--accent-900);
+    color: var(--accent-300);
+}
+.microphone-menu .microphone-container .device:hover {
+    background-color: var(--hover);
+}
+.microphone-menu .system-volume-container {
+    padding: 8px 18px 14px 18px;
+}
+.microphone-menu .system-volume-container .volume-slider::groove {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--n-800);
+}
+.microphone-menu .system-volume-container .volume-slider::sub-page {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent);
+}
+.microphone-menu .system-volume-container .volume-slider::handle {
+    background: var(--accent-300);
+    width: 14px;
+    height: 14px;
+    margin: -5px 0;
+    border-radius: 7px;
+}
+
 /* Ícone de PC (abre o popup de sistema) */
 .sysmon-widget {
     padding: 0 8px 0 6px;

@@ -45,7 +45,7 @@ bars:
     widgets:
       left: ["komorebi_control", "komorebi_workspaces", "komorebi_active_layout", "komorebi_stack", "pomodoro", "taskbar"]
       center: ["island"]
-      right: ["claude_usage", "codex_usage", "sysmon", "brightness", "volume", "notifications", "dnd", "power_menu"]
+      right: ["claude_usage", "codex_usage", "vscode", "whkd", "sysmon", "brightness", "volume", "microphone", "notifications", "dnd", "power_menu"]
 
   # ── Demais monitores: barra leve ───────────────────────────
   cd2-main:
@@ -61,7 +61,7 @@ bars:
     widgets:
       left: ["komorebi_workspaces", "komorebi_active_layout", "taskbar"]
       center: ["island_lite"]
-      right: ["brightness", "volume"]
+      right: ["brightness", "volume", "microphone"]
 
 widgets:
   # ── Ilha esquerda: komorebi ────────────────────────────────
@@ -439,6 +439,85 @@ widgets:
         on_left: "exec wscript.exe C:/Users/felip/.config/yasb/scripts/sysmon.vbs"
         on_middle: "do_nothing"
         on_right: "exec taskmgr.exe"
+
+  # Projetos e arquivos recentes do VS Code
+  vscode:
+    type: "yasb.vscode.VSCodeWidget"
+    options:
+      label: "<span>\U000F0A1E</span>"
+      label_alt: "<span>\U000F0A1E</span>"
+      menu_title: "VS Code · recentes"
+      icons:
+        folder: ""
+        file: ""
+        remote: ""
+      truncate_to_root_dir: true
+      max_number_of_folders: 20
+      max_number_of_files: 10
+      modified_date_format: "%d/%m %H:%M"
+      cli_command: "code"
+      menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        alignment: "right"
+        offset_top: 10
+        offset_left: 0
+
+  # Cola dos atalhos do whkd (komorebi)
+  whkd:
+    type: "yasb.whkd.WhkdWidget"
+    options:
+      label: "<span></span>"
+      special_keys:
+        - key: "win"
+          key_replace: "Win"
+        - key: "ctrl"
+          key_replace: "Ctrl"
+        - key: "alt"
+          key_replace: "Alt"
+        - key: "shift"
+          key_replace: "Shift"
+        - key: "left"
+          key_replace: "←"
+        - key: "right"
+          key_replace: "→"
+        - key: "up"
+          key_replace: "↑"
+        - key: "down"
+          key_replace: "↓"
+        - key: "oem_4"
+          key_replace: "["
+        - key: "oem_6"
+          key_replace: "]"
+        - key: "oem_1"
+          key_replace: ";"
+        - key: "return"
+          key_replace: "Enter"
+
+  # Microfone: clique abre o menu, botão direito muta
+  microphone:
+    type: "yasb.microphone.MicrophoneWidget"
+    options:
+      label: "<span>{icon}</span>"
+      label_alt: "<span>{icon}</span>{level}"
+      mute_text: "mudo"
+      icons:
+        normal: "\U000F036C"
+        muted: "\U000F036D"
+      mic_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#3f424d"
+        alignment: "right"
+        direction: "down"
+        offset_top: 10
+        offset_left: 0
+      callbacks:
+        on_left: "toggle_mic_menu"
+        on_middle: "toggle_label"
+        on_right: "toggle_mute"
 
   brightness:
     type: "yasb.brightness.BrightnessWidget"

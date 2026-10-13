@@ -64,5 +64,17 @@
       "id": "(?i)^claude\\.exe$",
       "matching_strategy": "Regex"
     }
+  ],
+  "ignore_rules": [
+    {
+      "kind": "Exe",
+      "id": "(?i)^yasb\\.exe$",
+      "matching_strategy": "Regex"
+    },
+    {
+      "kind": "Class",
+      "id": "PseudoConsoleWindow",
+      "matching_strategy": "Equals"
+    }
   ]
 }

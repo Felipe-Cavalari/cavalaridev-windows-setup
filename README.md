@@ -31,11 +31,11 @@ komorebi/
 
 - **Esquerda:** marca "C" (menu do komorebi), workspaces em pontos (o ativo vira uma barra blurple), layout atual, abas de stack, pomodoro e apps fixados. Os apps fixados mostram uma linha cinza quando o app está aberto e uma linha blurple quando está em foco.
 - **Centro:** a ilha dinâmica, com visualizador de áudio, capa do que está tocando, data e hora. Clicar na capa abre o player com o app de origem.
-- **Direita:** uso do Claude e do Codex, ícone de PC (abre um popup com CPU, GPU e RAM em gráficos), brilho via DDC/CI por monitor, volume, notificações, não perturbe e energia.
+- **Direita:** uso do Claude e do Codex, projetos recentes do VS Code, cola de atalhos do whkd, ícone de PC (abre um popup com CPU, GPU e RAM em gráficos), brilho via DDC/CI por monitor, volume, microfone, notificações, não perturbe e energia.
 
-**Demais monitores** ficam com uma barra leve: workspaces, apps fixados, data e hora, brilho e volume.
+**Demais monitores** ficam com uma barra leve: workspaces, apps fixados, data e hora, brilho, volume e microfone.
 
-**komorebi:** borda de 2 px arredondada, blurple na janela em foco e cinza nas outras, gaps de 10 px. O Claude desktop está cadastrado como app *layered* e *tray*, pra ser organizado.
+**komorebi:** borda de 2 px arredondada, blurple na janela em foco e cinza nas outras, gaps de 10 px. O Claude desktop está cadastrado como app *layered* e *tray*, pra ser organizado. As janelas do YASB (popups) e a `PseudoConsoleWindow` do Windows Terminal/WSL são ignoradas.
 
 ## Instalação
 
@@ -71,4 +71,5 @@ komorebic enable-autostart --whkd
 - Os apps fixados são selecionados no CSS por `.app-container[pinned="true"]`: quando o app está aberto, o YASB tira a classe `pinned` do ícone, mas mantém essa propriedade. Os não fixados ficam com largura zero.
 - No popup de mídia (`media_lite`), o padding precisa ir nos containers internos (`header`, `media-timeline-container`, `controls`); na janela do popup ele não tem efeito.
 - O komorebi compara o nome do executável em minúsculas (`claude.exe`). Por isso a regra do Claude usa a regex `(?i)^claude\.exe$`.
+- Os popups do YASB (como a lista de atalhos do whkd) são janelas comuns. Sem a regra `ignore_rules` para `yasb.exe`, o komorebi as encaixa no layout.
 - O popup de sistema é um script WPF à parte (`scripts/sysmon.ps1`), aberto pelo `sysmon.vbs` sem piscar console. Ele só consome memória enquanto está aberto.
