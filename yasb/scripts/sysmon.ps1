@@ -33,7 +33,7 @@ $Mono = 'JetBrainsMono NFP, Cascadia Mono, Consolas'
         SizeToContent="WidthAndHeight" FontFamily="Segoe UI" UseLayoutRounding="True">
   <Border x:Name="Shell" CornerRadius="12" BorderThickness="1" BorderBrush="$($C.Edge)" Padding="18,16,18,14" Width="340">
     <Border.Background>
-      <SolidColorBrush Color="$($C.Bg)" Opacity="0.94"/>
+      <SolidColorBrush Color="$($C.Bg)" Opacity="0.98"/>
     </Border.Background>
     <StackPanel>
       <Grid Margin="0,0,0,12">
