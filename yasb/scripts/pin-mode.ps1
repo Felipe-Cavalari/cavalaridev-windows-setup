@@ -1,4 +1,4 @@
-# ─────────────────────────────────────────────────────────────
+﻿# ─────────────────────────────────────────────────────────────
 #  CavalariDev · modo fixar
 #  Os apps não fixados ficam escondidos na barra (largura zero).
 #  Este script liga/desliga um modo em que os apps abertos aparecem
