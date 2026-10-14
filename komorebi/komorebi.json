@@ -76,5 +76,29 @@
       "id": "PseudoConsoleWindow",
       "matching_strategy": "Equals"
     }
-  ]
+  ],
+  "animation": {
+    "enabled": {
+      "movement": true,
+      "transparency": true
+    },
+    "duration": {
+      "movement": 350,
+      "transparency": 200
+    },
+    "style": {
+      "movement": {
+        "CubicBezier": [
+          0.05,
+          0.9,
+          0.1,
+          1.05
+        ]
+      },
+      "transparency": "EaseOutCubic"
+    },
+    "fps": 144
+  },
+  "transparency": true,
+  "transparency_alpha": 235
 }

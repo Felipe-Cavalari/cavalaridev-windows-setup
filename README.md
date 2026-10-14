@@ -66,6 +66,8 @@ Uma barra leve: workspaces, apps fixados, data e hora, brilho, volume e microfon
 
 - **Bordas:** 2 px, arredondadas, blurple na janela em foco e cinza nas outras.
 - **Gaps:** 10 px entre as janelas.
+- **Animações no estilo Hyprland:** as janelas se movem em 350 ms com a curva `CubicBezier(0.05, 0.9, 0.1, 1.05)`, a mesma dos temas do Hyprland (passa levemente do ponto e assenta), a 144 fps.
+- **Janelas sem foco levemente transparentes:** alpha 235 (cerca de 92%), com a transição animada em 200 ms.
 - **Claude desktop:** cadastrado como app *layered* e *tray*, pra entrar no layout.
 - **Ignoradas:** as janelas do YASB (popups) e a `PseudoConsoleWindow` do Windows Terminal/WSL.
 
